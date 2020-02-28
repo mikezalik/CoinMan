@@ -27,7 +27,7 @@ public class CoinMan extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-		batch.draw(man[0], Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		batch.draw(man[0], Gdx.graphics.getWidth() / 2 - man[0].getWidth() / 2, Gdx.graphics.getHeight() / 2 - man[0].getHeight() / 2);
 
 		batch.end();
 	}
