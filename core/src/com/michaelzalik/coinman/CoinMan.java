@@ -11,6 +11,7 @@ public class CoinMan extends ApplicationAdapter {
 	Texture background;
 	Texture[] man;
 	int manState = 0;
+	int pause = 0;
 	
 	@Override
 	public void create () {
@@ -28,13 +29,18 @@ public class CoinMan extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-		if (manState < 3) {
-			manState++;
+		if (pause < 8) {
+			pause++;
 		} else {
-			manState = 0;
+			pause = 0;
+			if (manState < 3) {
+				manState++;
+			} else {
+				manState = 0;
+			}
 		}
 
-		batch.draw(man[0], Gdx.graphics.getWidth() / 2 - man[0].getWidth() / 2, Gdx.graphics.getHeight() / 2 - man[0].getHeight() / 2);
+		batch.draw(man[manState], Gdx.graphics.getWidth() / 2 - man[0].getWidth() / 2, Gdx.graphics.getHeight() / 2 - man[manState].getHeight() / 2);
 
 		batch.end();
 	}
