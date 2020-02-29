@@ -5,8 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 
-import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,6 +19,7 @@ public class CoinMan extends ApplicationAdapter {
 	int manState = 0;
 	int pause = 0;
 	int manY = 0;
+	Rectangle manRectangle;
 
 	float gravity = 0.3f;
 	float velocity = 0;
@@ -128,6 +130,19 @@ public class CoinMan extends ApplicationAdapter {
 		}
 
 		batch.draw(man[manState],Gdx.graphics.getWidth() / 2 - man[manState].getWidth() / 2, manY);
+		manRectangle = new Rectangle(Gdx.graphics.getWidth() / 2 - man[manState].getWidth() / 2, manY, man[manState].getWidth(), man[manState].getHeight());
+
+		for (int i = 0; i < coinRectangles.size(); i++) {
+			if (Intersector.overlaps(manRectangle, coinRectangles.get(i))) {
+				Gdx.app.log("Coin!", "Collision!");
+			}
+		}
+
+		for (int i = 0; i < bombRectangles.size(); i++) {
+			if (Intersector.overlaps(manRectangle, bombRectangles.get(i))) {
+				Gdx.app.log("Bomb!", "Collision!");
+			}
+		}
 
 		batch.end();
 	}
