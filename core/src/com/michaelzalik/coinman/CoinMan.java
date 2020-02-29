@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.util.ArrayList;
+
 public class CoinMan extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture background;
@@ -17,6 +19,10 @@ public class CoinMan extends ApplicationAdapter {
 
 	float gravity = 0.3f;
 	float velocity = 0;
+
+	ArrayList<Integer> coinX = new ArrayList<Integer>();
+	ArrayList<Integer> coinY = new ArrayList<Integer>();
+	Texture coin;
 	
 	@Override
 	public void create () {
@@ -35,6 +41,10 @@ public class CoinMan extends ApplicationAdapter {
 	public void render () {
 		batch.begin();
 		batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+		if (Gdx.input.justTouched()) {
+			velocity = -10;
+		}
 
 		if (pause < 8) {
 			pause++;
