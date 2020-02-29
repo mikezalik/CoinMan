@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -23,11 +24,13 @@ public class CoinMan extends ApplicationAdapter {
 
 	ArrayList<Integer> coinX = new ArrayList<Integer>();
 	ArrayList<Integer> coinY = new ArrayList<Integer>();
+	ArrayList<Rectangle> coinRectangles = new ArrayList<>();
 	Texture coin;
 	int coinCount;
 
 	ArrayList<Integer> bombX = new ArrayList<Integer>();
 	ArrayList<Integer> bombY = new ArrayList<Integer>();
+	ArrayList<Rectangle> bombRectangles = new ArrayList<>();
 	Texture bomb;
 	int bombCount;
 
@@ -79,9 +82,12 @@ public class CoinMan extends ApplicationAdapter {
 		    makeCoin();
         }
 
+		coinRectangles.clear();
+
 		for (int i = 0; i < coinX.size(); i++) {
 		    batch.draw(coin, coinX.get(i), coinY.get(i));
 		    coinX.set(i, coinX.get(i) - 4);
+		    coinRectangles.add(new Rectangle(coinX.get(i), coinY.get(i), coin.getWidth(), coin.getHeight()));
         }
 
 		//Bombs
@@ -92,9 +98,11 @@ public class CoinMan extends ApplicationAdapter {
 			makeBomb();
 		}
 
+		bombRectangles.clear();
 		for (int i = 0; i < bombX.size(); i++) {
 			batch.draw(bomb, bombX.get(i), bombY.get(i));
 			bombX.set(i, bombX.get(i) - 8);
+			bombRectangles.add(new Rectangle(bombX.get(i), bombY.get(i), bomb.getWidth(), bomb.getHeight()));
 		}
 
 		if (Gdx.input.justTouched()) {
